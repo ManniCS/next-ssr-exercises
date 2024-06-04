@@ -3,7 +3,7 @@ import React from 'react';
 import format from 'date-fns/format';
 
 function Clock() {
-  const [time, setTime] = React.useState(null);
+  const [time, setTime] = React.useState(new Date());
 
   React.useEffect(() => {
     const intervalId = window.setInterval(() => {
@@ -16,7 +16,7 @@ function Clock() {
   }, []);
 
   return (
-    <p className="clock">{time instanceof Date ? format(time, 'hh:mm:ss.S a') : 'Loading ...' }</p>
+    <p suppressHydrationWarning className="clock">{format(time, 'hh:mm:ss.S a')}</p>
   );
 }
 
