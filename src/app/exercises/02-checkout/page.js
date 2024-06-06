@@ -14,16 +14,18 @@ function CheckoutExercise() {
   );
   React.useEffect(() => { 
     const savedItems = window.localStorage.getItem('items')
-    dispatch({type: 'initialize'})
-    if (savedItems === null) { 
-      return 
-    }
-    JSON.parse(savedItems).forEach((item) => { 
-      for (let i = 0; i < item.quantity; i++) { 
-        dispatch({type: 'add-item', item})
-      }
+    dispatch({
+      type: 'initialize', 
+      items: savedItems === null ? [] : JSON.parse(savedItems)
     })
   }, [])
+
+  React.useEffect(() => { 
+    if (items === null) { 
+      return
+    }
+    window.localStorage.setItem('items', JSON.stringify(items))
+  }, [items])
 
   return (
     <>
