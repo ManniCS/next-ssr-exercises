@@ -1,8 +1,11 @@
 import { produce } from 'immer';
 
 function reducer(state, action) {
-  return produce(state, (draftState) => {
+  const nextState = produce(state, (draftState) => {
     switch (action.type) {
+      case 'initialize': { 
+        return []
+      }
       case 'add-item': {
         const itemIndex = state.findIndex(
           (item) => item.id === action.item.id
@@ -30,6 +33,9 @@ function reducer(state, action) {
       }
     }
   });
+  window.localStorage.setItem("items", JSON.stringify(nextState))
+  console.log(nextState);
+  return nextState
 }
 
 export default reducer;

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-function StoreItem({ item, handleAddToCart }) {
+function StoreItem({ item, handleAddToCart, enabled}) {
   const price = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -12,7 +12,7 @@ function StoreItem({ item, handleAddToCart }) {
       <img src={item.imageSrc} alt={item.imageAlt} />
       <h2>{item.title}</h2>
       <p>{price}</p>
-      <button onClick={() => handleAddToCart(item)}>
+      <button disabled={!enabled} onClick={() => handleAddToCart(item)}>
         Add to Cart
       </button>
     </article>

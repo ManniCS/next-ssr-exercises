@@ -10,8 +10,20 @@ import './styles.css';
 function CheckoutExercise() {
   const [items, dispatch] = React.useReducer(
     reducer,
-    []
+    null
   );
+  React.useEffect(() => { 
+    const savedItems = window.localStorage.getItem('items')
+    dispatch({type: 'initialize'})
+    if (savedItems === null) { 
+      return 
+    }
+    JSON.parse(savedItems).forEach((item) => { 
+      for (let i = 0; i < item.quantity; i++) { 
+        dispatch({type: 'add-item', item})
+      }
+    })
+  }, [])
 
   return (
     <>
@@ -23,6 +35,7 @@ function CheckoutExercise() {
             <StoreItem
               key={item.id}
               item={item}
+              enabled={items !== null}
               handleAddToCart={(item) => {
                 dispatch({
                   type: 'add-item',

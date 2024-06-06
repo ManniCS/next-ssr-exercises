@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-function CartTable({ items, handleDeleteItem }) {
+function CartTable({ items, handleDeleteItem}) {
   return (
     <table className="shopping-cart">
       <thead>
